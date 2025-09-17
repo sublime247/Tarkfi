@@ -240,4 +240,4 @@ The contract emits detailed events for transparency:
 
 MIT License - see LICENSE file for details.
 
----
+--- 
