@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 
 /**
- * @title TakafulInsurance
+ * @title Takfi Insurance
  * @dev Sharia-compliant insurance (Takaful) smart contract for non-life insurance
  * Supports both individual and group policies with transparent contribution pooling,
  * claims processing, and surplus distribution
