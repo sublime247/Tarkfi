@@ -37,8 +37,8 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
 
         <div className="space-y-4">
           {/* Policy Type */}
-          <div>
-            <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+            <label className="block text-xl font-medium text-gray-300 mb-2">
               Select policy type
             </label>
             <div className="relative">
@@ -56,8 +56,8 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
           </div>
 
           {/* Asset Type */}
-          <div>
-            <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+            <label className="block text-xl font-medium text-gray-300 mb-2">
               Select asset type
             </label>
             <div className="relative">
@@ -76,8 +76,8 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
           </div>
 
           {/* Asset Value */}
-          <div>
-              <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+              <label className="block text-xl font-medium text-gray-300 mb-2">
               Add asset value
             </label>
             <input
@@ -90,8 +90,8 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
           </div>
 
           {/* Duration */}
-          <div>
-            <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+            <label className="block text-xl font-medium text-gray-300 mb-2">
               Duration of Asset Holding
             </label>
             <div className="relative">
@@ -110,8 +110,8 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
           </div>
 
           {/* Asset Description */}
-          <div>
-            <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+            <label className="block text-xl font-medium text-gray-300 mb-2">
               Asset Description
             </label>
             <textarea
@@ -119,18 +119,19 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Type something"
               rows={3}
-                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] resize-none"
+                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] resize-none mb-2"
             />
           </div>
 
           {/* Upload Document */}
-          <div>
-            <label className="block text-xl font-semibold text-gray-300 mb-4">
+          <div className="mb-4">
+            <label className="block text-xl font-medium text-gray-300 mb-2">
               Upload Document
             </label>
-            <div className="border-2 border-dashed border-gray-600 rounded-md p-8 text-center hover:border-[#12D96A] transition-colors cursor-pointer">
+              <div className="border-2 border-dashed border-gray-600 rounded-md p-8 text-center hover:border-[#12D96A] transition-colors cursor-pointer">
               <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-400 text-sm">Upload a document of ownership</p>
+              <p className="text-gray-400 text-sm">Upload a document of ownership</p> 
+              
             </div>
           </div>
         </div>
