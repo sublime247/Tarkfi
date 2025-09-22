@@ -13,7 +13,7 @@ export default function Page() {
     switch (activeTab) {
       case "Dashboard":
         return (
-         <Dashboard />
+          <Dashboard />
         );
       case "Policies":
         return (
@@ -38,10 +38,10 @@ export default function Page() {
       case "Settings":
         return (
           <div className="">
-          {/* <div className="flex items-center justify-center h-full">
+            {/* <div className="flex items-center justify-center h-full">
             <h2 className="text-3xl font-bold text-white">Claims Content</h2>
           </div> */}
-        </div>
+          </div>
         )
       default:
         return null
@@ -49,15 +49,15 @@ export default function Page() {
   }
 
   return (
-    <div className="flex h-screen bg-[#0B0F0E]">
+    <div className="flex h-screen bg-[#0B0F0E] overflow-hidden">
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col min-w-0">
         {/* Header - stays the same */}
         <Header />
 
-        {/* Dynamic Content Area */}
-        <main className="flex-1 p-6">
+        {/* Dynamic Content Area - Now scrollable */}
+        <main className="flex-1 p-6 overflow-y-auto">
           {renderContent()}
         </main>
       </div>

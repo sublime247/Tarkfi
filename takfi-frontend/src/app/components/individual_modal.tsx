@@ -19,10 +19,14 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-[#1a1a1a] rounded-lg p-6 w-full max-w-md mx-4">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-white">Create Policy</h2>
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      {/* Blurred backdrop */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
+
+      {/* Modal content */}
+      <div className="relative bg-[#1E2722] p-6 w-full max-w-[700px] mx-4">
+        <div className="flex justify-end items-end mb-6">
+        
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-white transition-colors"
@@ -34,14 +38,14 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
         <div className="space-y-4">
           {/* Policy Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xl font-semibold text-gray-300 mb-4">
               Select policy type
             </label>
             <div className="relative">
               <select
                 value={policyType}
                 onChange={(e) => setPolicyType(e.target.value)}
-                className="w-full bg-[#2a2a2a] border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
+                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
               >
                 <option value="Individual Policy">Individual Policy</option>
                 <option value="Group Policy">Group Policy</option>
@@ -53,14 +57,14 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
 
           {/* Asset Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xl font-semibold text-gray-300 mb-4">
               Select asset type
             </label>
             <div className="relative">
               <select
                 value={assetType}
                 onChange={(e) => setAssetType(e.target.value)}
-                className="w-full bg-[#2a2a2a] border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
+                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
               >
                 <option value="Car/Motor">Car/Motor</option>
                 <option value="Property">Property</option>
@@ -73,28 +77,28 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
 
           {/* Asset Value */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-xl font-semibold text-gray-300 mb-4">
               Add asset value
             </label>
             <input
               type="text"
               value={assetValue}
               onChange={(e) => setAssetValue(e.target.value)}
-              className="w-full bg-[#2a2a2a] border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
+              className="w-full border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
               placeholder="$0.00"
             />
           </div>
 
           {/* Duration */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xl font-semibold text-gray-300 mb-4">
               Duration of Asset Holding
             </label>
             <div className="relative">
               <select
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full bg-[#2a2a2a] border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
+                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#12D96A]"
               >
                 <option value="min. 6 months">min. 6 months</option>
                 <option value="1 year">1 year</option>
@@ -107,7 +111,7 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
 
           {/* Asset Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xl font-semibold text-gray-300 mb-4">
               Asset Description
             </label>
             <textarea
@@ -115,13 +119,13 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Type something"
               rows={3}
-              className="w-full bg-[#2a2a2a] border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] resize-none"
+                className="w-full border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] resize-none"
             />
           </div>
 
           {/* Upload Document */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-xl font-semibold text-gray-300 mb-4">
               Upload Document
             </label>
             <div className="border-2 border-dashed border-gray-600 rounded-md p-8 text-center hover:border-[#12D96A] transition-colors cursor-pointer">
@@ -139,7 +143,7 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
             className="flex-1 bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800"
           >
             Cancel
-          </Button>
+          </Button> 
           <Button
             onClick={() => {
               // Handle continue logic here
