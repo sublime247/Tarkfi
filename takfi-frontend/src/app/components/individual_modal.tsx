@@ -49,7 +49,7 @@ export default function IndividualModal({ isOpen, onClose }: IndividualModalProp
               >
                 <option value="Individual Policy">Individual Policy</option>
                 <option value="Group Policy">Group Policy</option>
-                <option value="Corporate Policy">Corporate Policy</option>
+               
               </select>
               <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
