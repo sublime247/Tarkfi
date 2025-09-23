@@ -1,5 +1,6 @@
 import type { HardhatUserConfig } from "hardhat/config";
 
+// import HardhatIgnitionEthersPlugin from '@nomicfoundation/hardhat-ignition-ethers';
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { configVariable } from "hardhat/config";
 
@@ -40,7 +41,7 @@ const config: HardhatUserConfig = {
       type: "http",
       chainType: "l1",
       url: "https://testnet.hashio.io/api",
-      accounts: [configVariable("HEDERA_TESTNET_PRIVATE_KEY")],
+      accounts: ["156a825c08161eebd4908f3aec5f8cedf6efb27f81f3bbca897dce800664b907"],
       chainId: 296,
     },
     hederaMainnet: {

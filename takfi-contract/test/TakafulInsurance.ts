@@ -4,8 +4,10 @@ import { network } from "hardhat";
 import { parseEther } from "viem";
 
 describe("TakafulInsurance", async function () {
-    const { viem } = await network.connect();
-    const publicClient = await viem.getPublicClient();
+    const { viem } = await network.connect({
+        network: "hardhatOp"
+    });
+    // const publicClient = await viem.getPublicClient();  //  getPublicClient is not a function   
 
     let takafulInsurance: any;
     let deployer: any;

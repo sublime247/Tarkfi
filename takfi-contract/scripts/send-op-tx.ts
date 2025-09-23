@@ -1,31 +1,20 @@
 import { network } from "hardhat";
-
-const { viem } = await network.connect({
-  network: "hardhatOp",
-  chainType: "op",
+// const [owner] = await hre.ethers.getSigners();
+const {viem} = await network.connect({
+  network: "hederaTestnet"
 });
 
-console.log("Sending transaction using the OP chain type");
+console.log("Sending transaction on Hedera network");
 
-const publicClient = await viem.getPublicClient();
-const [senderClient] = await viem.getWalletClients();
+const [sender] = await viem.getWalletClients();
 
-console.log("Sending 1 wei from", senderClient.account.address, "to itself");
+console.log("Sending 10_000_000_000 wei from", sender.account.address, "to itself");
 
-const l1Gas = await publicClient.estimateL1Gas({
-  account: senderClient.account.address,
-  to: senderClient.account.address,
-  value: 1n,
+console.log("Sending transaction");
+    await sender.sendTransaction({
+  to: sender.account.address,
+  value: 10_000_000_000n
 });
 
-console.log("Estimated L1 gas:", l1Gas);
-
-console.log("Sending L2 transaction");
-const tx = await senderClient.sendTransaction({
-  to: senderClient.account.address,
-  value: 1n,
-});
-
-await publicClient.waitForTransactionReceipt({ hash: tx });
-
+// await viem.waitForTransactionReceipt({ hash: tx });
 console.log("Transaction sent successfully");
