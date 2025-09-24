@@ -13,7 +13,7 @@ export default function ClaimsPage() {
   return (
     <main className="flex-1 overflow-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border">
+        <div className="flex items-center justify-between p-6">
           <h1 className="text-3xl font-bold text-foreground">Claims</h1>
           <Button
             className="bg-[#12D96A] hover:bg-[#12D96A] text-primary-foreground cursor-pointer"

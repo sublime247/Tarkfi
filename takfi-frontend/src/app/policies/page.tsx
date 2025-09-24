@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 // import { SubmitClaimModal } from "@/components/submit-claim-modal"
 import { SquarePen, Eye, Dot } from "lucide-react"
+import { CreateGroupPolicyModal } from "../components/group_policy_modal"
 
 export default function DashboardPage() {
   const [showSubmitModal, setShowSubmitModal] = useState(false)
@@ -14,9 +15,9 @@ export default function DashboardPage() {
   return (
     <main className="flex-1 overflow-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border">
+        <div className="flex items-center justify-between p-6">
           <h1 className="text-3xl font-bold text-foreground">Active Policies</h1>
-          <Button className="bg-[#12D96A] hover:bg-green text-black cursor-pointer transition-transform duration-200 hover:scale-105">
+          <Button className="bg-[#12D96A] hover:bg-green text-black cursor-pointer transition-transform duration-200 hover:scale-105" onClick={() => setShowSubmitModal(true)}>
             <SquarePen className="h-4 w-4 mr-2" />
             Create Policy
           </Button>
@@ -57,14 +58,14 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -95,14 +96,14 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -133,14 +134,14 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -198,15 +199,15 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
-                    <p className="text-xs text-muted-foreground mt-1">3 of 9</p>
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
+                    <p className="text-xs text-muted-foreground mt-1 text-right">3 of 9</p>
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -252,15 +253,15 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
-                    <p className="text-xs text-muted-foreground mt-1">3 of 9</p>
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
+                    <p className="text-xs text-muted-foreground mt-1 text-right">3 of 9</p>
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -306,15 +307,15 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-muted-foreground">Contribution Progress</span>
-                      <span className="text-primary">25%</span>
+                      <span className="text-[#34C759]">25%</span>
                     </div>
-                    <Progress value={25} className="h-2" />
-                    <p className="text-xs text-muted-foreground mt-1">3 of 9</p>
+                    <Progress value={25} className="h-2 bg-[#20B16C99] [&_.bg-primary]:bg-[#34C759]" />
+                    <p className="text-xs text-muted-foreground mt-1 text-right">3 of 9</p>
                   </div>
 
                   <Button
                     variant="outline"
-                    className="cursor-pointer w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                    className="cursor-pointer w-full border-[#12D96A] text-primary hover:bg-[#12D96A] hover:text-primary-foreground bg-transparent"
                   >
                     View Details
                   </Button>
@@ -324,7 +325,7 @@ export default function DashboardPage() {
           </section>
         </div>
 
-        {/* <SubmitClaimModal open={showSubmitModal} onOpenChange={setShowSubmitModal} /> */}
+        <CreateGroupPolicyModal open={showSubmitModal} onOpenChange={setShowSubmitModal} />
       </main>
   )
 }
