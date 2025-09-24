@@ -5,6 +5,8 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { Sidebar } from "@/app/components/sidebar"
+import { Header } from "@/app/components/header"
 
 export const metadata: Metadata = {
   title: "TAKFI  Dashboard",
@@ -20,7 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <div className="flex h-screen bg-[#0B0F0E] overflow-hidden">
+          <Sidebar />
+          <div className="flex flex-1 flex-col min-w-0">
+            <Header />
+            <main className="flex-1 p-6 overflow-y-auto">
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            </main>
+          </div>
+        </div>
         <Analytics />
       </body>
     </html>

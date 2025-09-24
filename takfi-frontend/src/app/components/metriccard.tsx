@@ -1,5 +1,8 @@
+"use client"
+import { useState, ChangeEvent } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { LucideIcon } from "lucide-react"
+import { useRouter, usePathname } from "next/navigation";
 
 interface MetricCardProps {
     title: string
@@ -60,12 +63,48 @@ const claimHistoryData: ClaimHistoryItem[] = [
 ]
 
 export function ClaimHistoryCard() {
+    const [search, setSearch] = useState("");
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const isClaimsPage = pathname === "/claims";
+
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
+
+    const filteredClaims = claimHistoryData.filter((claim) => {
+        const searchLower = search.toLowerCase();
+        return (
+            claim.claimId.toLowerCase().includes(searchLower) ||
+            claim.amountClaimed.toLowerCase().includes(searchLower) ||
+            claim.asset.toLowerCase().includes(searchLower) ||
+            claim.requestDate.toLowerCase().includes(searchLower) ||
+            claim.surplus.toLowerCase().includes(searchLower) ||
+            claim.status.toLowerCase().includes(searchLower)
+        );
+    });
+
     return (
         <Card className="bg-[#1E2722] border-gray-700/50">
             <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between flex-wrap gap-2">
                     <h2 className="text-2xl font-bold text-white">Claim History</h2>
-                    <button className="text-green-400 hover:text-green-300 text-sm">View all</button>
+                    <div className="flex items-center gap-12">
+                        {isClaimsPage && (
+                            <input
+                                type="text"
+                                value={search}
+                                onChange={handleSearchChange}
+                                placeholder="Search claims"
+                                className="border border-[#595959] rounded px-3 py-1 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] placeholder-gray-400"
+                                style={{ minWidth: 160 }}
+                            />
+                        )}
+                        {!isClaimsPage && (
+                            <button className="text-green-400 hover:text-green-300 text-sm" onClick={() => router.push("/claims")}>View all</button>
+                        )}
+                    </div>
                 </div>
             </CardHeader>
             <CardContent>
@@ -82,23 +121,29 @@ export function ClaimHistoryCard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {claimHistoryData.map((claim, index) => (
-                                <tr key={index} className="border-b border-gray-700/30">
-                                    <td className="py-4 px-4 text-white">{claim.claimId}</td>
-                                    <td className="py-4 px-4 text-white">{claim.amountClaimed}</td>
-                                    <td className="py-4 px-4 text-white">{claim.asset}</td>
-                                    <td className="py-4 px-4 text-white">{claim.requestDate}</td>
-                                    <td className="py-4 px-4 text-white">{claim.surplus}</td>
-                                    <td className="py-4 px-4">
-                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${claim.status === 'Approved' ? 'bg-green-600 text-white' :
-                                            claim.status === 'Pending' ? 'bg-yellow-600 text-white' :
-                                                'bg-red-600 text-white'
-                                            }`}>
-                                            {claim.status}
-                                        </span>
-                                    </td>
+                            {filteredClaims.length > 0 ? (
+                                filteredClaims.map((claim, index) => (
+                                    <tr key={index} className="border-b border-gray-700/30">
+                                        <td className="py-4 px-4 text-white">{claim.claimId}</td>
+                                        <td className="py-4 px-4 text-white">{claim.amountClaimed}</td>
+                                        <td className="py-4 px-4 text-white">{claim.asset}</td>
+                                        <td className="py-4 px-4 text-white">{claim.requestDate}</td>
+                                        <td className="py-4 px-4 text-white">{claim.surplus}</td>
+                                        <td className="py-4 px-4">
+                                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${claim.status === 'Approved' ? 'bg-green-600 text-white' :
+                                                claim.status === 'Pending' ? 'bg-yellow-600 text-white' :
+                                                    'bg-red-600 text-white'
+                                                }`}>
+                                                {claim.status}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={6} className="py-6 px-4 text-center text-gray-400">No claims found.</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>

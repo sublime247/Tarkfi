@@ -3,6 +3,7 @@
 import { Home, FileText, ClipboardList, TrendingUp, Settings } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { usePathname, useRouter } from "next/navigation"
 
 const navigation = [
     { name: "Dashboard", href: "/", icon: Home },
@@ -12,12 +13,10 @@ const navigation = [
     { name: "Settings", href: "/settings", icon: Settings },
 ]
 
-interface SidebarProps {
-    activeTab: string
-    onTabChange: (tab: string) => void
-}
+export function Sidebar() {
+    const router = useRouter();
+    const pathname = usePathname();
 
-export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
     return (
         <div className="flex h-full w-64 flex-col" style={{ backgroundColor: "#141A16" }}>
             {/* Logo */}
@@ -31,12 +30,12 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
             <nav className="flex flex-1 flex-col px-4 py-4 mt-30">
                 <ul role="list" className="flex flex-1 flex-col gap-y-10">
                     {navigation.map((item) => {
-                        const isActive = activeTab === item.name
+                        const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
                         return (
                             <li key={item.name}>
                                 <Button
                                     variant="ghost"
-                                    onClick={() => onTabChange(item.name)}
+                                    onClick={() => router.push(item.href)}
                                     className={cn(
                                         "w-full justify-start gap-x-3 px-3 py-5 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer",
                                         isActive && "text-white",
