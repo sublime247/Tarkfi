@@ -1,3 +1,4 @@
+"use client"
 import { Briefcase, FileCheck, TrendingUp } from "lucide-react";
 import { ClaimHistoryCard, MetricCard, UserSummaryCard } from "../components/metriccard";
 

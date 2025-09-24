@@ -2,6 +2,7 @@
 import { useState, ChangeEvent } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { LucideIcon } from "lucide-react"
+import { useRouter, usePathname } from "next/navigation";
 
 interface MetricCardProps {
     title: string
@@ -63,6 +64,10 @@ const claimHistoryData: ClaimHistoryItem[] = [
 
 export function ClaimHistoryCard() {
     const [search, setSearch] = useState("");
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const isClaimsPage = pathname === "/claims";
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -86,15 +91,19 @@ export function ClaimHistoryCard() {
                 <div className="flex items-center justify-between flex-wrap gap-2">
                     <h2 className="text-2xl font-bold text-white">Claim History</h2>
                     <div className="flex items-center gap-12">
-                        <input
-                            type="text"
-                            value={search}
-                            onChange={handleSearchChange}
-                            placeholder="Search claims"
-                            className="border border-[#595959] rounded px-3 py-1 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] placeholder-gray-400"
-                            style={{ minWidth: 160 }}
-                        />
-                        <button className="text-green-400 hover:text-green-300 text-sm">View all</button>
+                        {isClaimsPage && (
+                            <input
+                                type="text"
+                                value={search}
+                                onChange={handleSearchChange}
+                                placeholder="Search claims"
+                                className="border border-[#595959] rounded px-3 py-1 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#12D96A] placeholder-gray-400"
+                                style={{ minWidth: 160 }}
+                            />
+                        )}
+                        {!isClaimsPage && (
+                            <button className="text-green-400 hover:text-green-300 text-sm" onClick={() => router.push("/claims")}>View all</button>
+                        )}
                     </div>
                 </div>
             </CardHeader>

@@ -3,8 +3,9 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Plus, BookDown, Hourglass, BadgeCheck, XCircle, ArrowRight } from "lucide-react"
+import { CopyPlus, BookDown, Hourglass, BadgeCheck, XCircle, ArrowRight } from "lucide-react"
 import { ClaimHistoryCard } from "../components/metriccard"
+import { SubmitClaimModal } from "../components/submit_claim_modal"
 
 export default function ClaimsPage() {
   const [showSubmitModal, setShowSubmitModal] = useState(false)
@@ -18,7 +19,7 @@ export default function ClaimsPage() {
             className="bg-[#12D96A] hover:bg-[#12D96A] text-primary-foreground cursor-pointer"
             onClick={() => setShowSubmitModal(true)}
           >
-            <Plus className="h-4 w-4 mr-2" />
+            <CopyPlus className="h-4 w-4 mr-2" />
             Submit a Claim
           </Button>
         </div>
@@ -108,7 +109,7 @@ export default function ClaimsPage() {
             <ClaimHistoryCard />
           </section>
         </div>
-        {/* <SubmitClaimModal open={showSubmitModal} onOpenChange={setShowSubmitModal} /> */}
+        <SubmitClaimModal open={showSubmitModal} onOpenChange={setShowSubmitModal} />
       </main>
   )
 }
