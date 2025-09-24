@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 // import { SubmitClaimModal } from "@/components/submit-claim-modal"
 import { SquarePen, Eye, Dot } from "lucide-react"
-import { CreateGroupPolicyModal } from "../components/group_policy_modal"
+import { CreatePolicyModal } from "../components/create_policy_modal"
 
 export default function DashboardPage() {
   const [showSubmitModal, setShowSubmitModal] = useState(false)
@@ -325,7 +325,7 @@ export default function DashboardPage() {
           </section>
         </div>
 
-        <CreateGroupPolicyModal open={showSubmitModal} onOpenChange={setShowSubmitModal} />
+        <CreatePolicyModal open={showSubmitModal} onOpenChange={setShowSubmitModal} />
       </main>
   )
 }

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Upload, ArrowLeft, Copy, ArrowRight } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 
-interface CreateGroupPolicyModalProps {
+interface CreatePolicyModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -28,7 +28,8 @@ interface PolicyFormData {
   inviteLink: string
 }
 
-export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicyModalProps) {
+export function CreatePolicyModal({ open, onOpenChange }: CreatePolicyModalProps) {
+  // We use a "virtual" step system to allow skipping group details for individual policy
   const [currentStep, setCurrentStep] = useState<Step>(1)
   const [formData, setFormData] = useState<PolicyFormData>({
     policyType: "",
@@ -42,25 +43,48 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
     inviteLink: "https://takafi-ai/invite/group_764g1",
   })
 
+  const isIndividual = formData.policyType === "individual"
+  // For step navigation, we need to skip step 2 if individual
+  // So, the visible steps are:
+  // 1: always (policy/asset)
+  // 2: group details (only for group)
+  // 3: contribution preview (always)
+  // 4: success (always)
+
   const handleInputChange = (field: keyof PolicyFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
-
+  // Helper to go to next step, skipping group details if needed
   const handleNext = () => {
-    if (currentStep < 3) {
-      setCurrentStep((prev) => (prev + 1) as Step)
+    if (currentStep === 1) {
+      if (isIndividual) {
+        setCurrentStep(3)
+      } else {
+        setCurrentStep(2)
+      }
+    } else if (currentStep === 2) {
+      setCurrentStep(3)
+    } else if (currentStep === 3) {
+      // Should not be called, handled by handleSubmit
     }
   }
 
+  // Helper to go back, skipping group details if needed
   const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prev) => (prev - 1) as Step)
+    if (currentStep === 3) {
+      if (isIndividual) {
+        setCurrentStep(1)
+      } else {
+        setCurrentStep(2)
+      }
+    } else if (currentStep === 2) {
+      setCurrentStep(1)
     }
   }
 
   const handleSubmit = () => {
     console.log("Policy created:", formData)
-    setCurrentStep((prev) => (prev + 1) as Step)
+    setCurrentStep(4)
     // onOpenChange(false)
     // setCurrentStep(1)
   }
@@ -81,6 +105,14 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
     })
   }
 
+  const handlePolicyTypeChange = (value: string) => {
+    // If switching to individual and currently on group details, jump to step 3
+    setFormData((prev) => ({ ...prev, policyType: value }))
+    if (value === "individual" && currentStep === 2) {
+      setCurrentStep(3)
+    }
+  }
+
   const copyInviteLink = () => {
     navigator.clipboard.writeText(formData.inviteLink)
   }
@@ -89,7 +121,7 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
     <div className="space-y-6">
       <div className="space-y-2">
         <Label className="text-sm font-medium text-card-foreground">Select policy type</Label>
-        <Select value={formData.policyType} onValueChange={(value) => handleInputChange("policyType", value)}>
+        <Select value={formData.policyType} onValueChange={handlePolicyTypeChange}>
           <SelectTrigger className="bg-input border-border text-foreground w-full">
             <SelectValue placeholder="Individual Policy" />
           </SelectTrigger>
@@ -280,27 +312,54 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
     </div>
   )
 
+  // Dynamically get the title based on current step and policy type
   const getTitle = () => {
-    switch (currentStep) {
-      case 1:
-        return "Create New Policy"
-      case 2:
-        return "Group Details"
-      case 3:
-        return "Contribution Preview"
-      case 4:
-        return "Policy Created"
-      default:
-        return "Create New Policy"
-    }
+    if (currentStep === 1) return "Create New Policy"
+    if (currentStep === 2) return "Group Details"
+    if (currentStep === 3) return "Contribution Preview"
+    if (currentStep === 4) return "Policy Created"
+    return "Create New Policy"
   }
+
+  // Render the correct step, skipping group details for individual
+  const renderCurrentStep = () => {
+    if (currentStep === 1) return renderStep1()
+    if (currentStep === 2) return renderStep2()
+    if (currentStep === 3) return renderStep3()
+    if (currentStep === 4) return renderStep4()
+    return null
+  }
+
+  // Show the Continue button for steps before contribution preview
+  const showContinue =
+    (currentStep === 1) ||
+    (currentStep === 2 && !isIndividual)
+
+  // Show the Proceed button only on contribution preview
+  const showProceed =
+    (currentStep === 3)
+
+  // Show the Done button only on success
+  const showDone =
+    (currentStep === 4)
+
+  // Show the Cancel button for steps before contribution preview
+  const showCancel =
+    (currentStep === 1) ||
+    (currentStep === 2 && !isIndividual)
+
+  // Show the back button for steps after the first visible step
+  const showBack =
+    (currentStep === 2 && !isIndividual) ||
+    (currentStep === 3) ||
+    (currentStep === 4)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-card border-border">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-card-foreground flex items-center gap-2">
-            {currentStep !== 1 && (
+            {showBack && (
               <Button variant="ghost" size="sm" onClick={handleBack} className="p-0 h-auto hover:bg-transparent cursor-pointer">
                 <ArrowLeft className="h-5 w-5 text-card-foreground" />
               </Button>
@@ -310,13 +369,10 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
         </DialogHeader>
 
         <div className="mt-6">
-          {currentStep === 1 && renderStep1()}
-          {currentStep === 2 && renderStep2()}
-          {currentStep === 3 && renderStep3()}
-          {currentStep === 4 && renderStep4()}
+          {renderCurrentStep()}
         </div>
 
-        {currentStep < 3 && (
+        {showCancel && (
           <div className="flex gap-4 pt-4">
             <Button
               type="button"
@@ -332,7 +388,7 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
           </div>
         )}
 
-        {currentStep === 3 && (
+        {showProceed && (
           <div className="pt-4">
             <Button
               onClick={handleSubmit}
@@ -344,7 +400,7 @@ export function CreateGroupPolicyModal({ open, onOpenChange }: CreateGroupPolicy
           </div>
         )}
 
-        {currentStep === 4 && (
+        {showDone && (
           <div className="pt-4">
             <Button
               onClick={() => {onOpenChange(false); setCurrentStep(1)}}
