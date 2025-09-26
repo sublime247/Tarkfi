@@ -187,7 +187,6 @@ contract TakafulInsurance is
 
         uint256 policyId = nextPolicyId++;
         Policy storage newPolicy = policies[policyId];
-
         newPolicy.policyId = policyId;
         newPolicy.policyType = _policyType;
         newPolicy.creator = msg.sender;

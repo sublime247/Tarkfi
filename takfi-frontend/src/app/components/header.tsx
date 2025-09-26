@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 export function Header() {
   return (
@@ -14,12 +15,7 @@ export function Header() {
       <Avatar className="h-8 w-8">
         <img src="/hedera_logo.png" alt="TakFi" className="w-100" />
       </Avatar>
-      <Button
-        className="text-primary-foreground font-medium"
-        style={{ backgroundColor: "#12D96A", color: "#0B0F0E" }}
-      >
-        Connect Wallet
-      </Button>
+      <ConnectButton />
     </div>
   </header>
   

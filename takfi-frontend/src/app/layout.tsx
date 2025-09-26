@@ -7,6 +7,8 @@ import { Suspense } from "react"
 import "./globals.css"
 import { Sidebar } from "@/app/components/sidebar"
 import { Header } from "@/app/components/header"
+import { Providers } from "./provider"
+import '@rainbow-me/rainbowkit/styles.css';
 
 export const metadata: Metadata = {
   title: "TAKFI  Dashboard",
@@ -22,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <Providers>
         <div className="flex h-screen bg-[#0B0F0E] overflow-hidden">
           <Sidebar />
           <div className="flex flex-1 flex-col min-w-0">
@@ -32,6 +35,7 @@ export default function RootLayout({
           </div>
         </div>
         <Analytics />
+        </Providers>
       </body>
     </html>
   )
