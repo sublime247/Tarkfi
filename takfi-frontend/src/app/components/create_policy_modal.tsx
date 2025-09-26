@@ -200,17 +200,12 @@ export function CreatePolicyModal({ open, onOpenChange }: CreatePolicyModalProps
     <div className="space-y-6">
       <div className="space-y-2">
         <Label className="text-sm font-medium text-card-foreground">Group name</Label>
-        <Select value={formData.groupName} onValueChange={(value) => handleInputChange("groupName", value)}>
-          <SelectTrigger className="bg-input border-border text-foreground w-full">
-            <SelectValue placeholder="Car/Motor" />
-          </SelectTrigger>
-          <SelectContent className="bg-popover border-border">
-            <SelectItem value="car-motor">Car/Motor</SelectItem>
-            <SelectItem value="land">Land</SelectItem>
-            <SelectItem value="building">Building</SelectItem>
-            <SelectItem value="health">Health</SelectItem>
-          </SelectContent>
-        </Select>
+        <Input
+          placeholder="Car/Motor"
+          value={formData.groupName}
+          onChange={(e) => handleInputChange("groupName", e.target.value)}
+          className="bg-input border-border text-foreground placeholder:text-muted-foreground"
+        />
       </div>
 
       <div className="space-y-2">
