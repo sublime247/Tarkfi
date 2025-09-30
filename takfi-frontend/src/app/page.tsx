@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowRight, Upload, Zap } from "lucide-react"
+import { ArrowRight, Upload, Zap, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -26,55 +26,202 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#0a0f0d] text-foreground">
       {/* Navigation */}
-      <nav className="border-b border-border/40 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-border/20 backdrop-blur-sm sticky top-0 z-50 bg-[#0a0f0d]/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">T</span>
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#00ff88] rounded flex items-center justify-center">
+                <span className="text-black font-bold text-lg">K</span>
               </div>
-              <span className="text-xl font-bold">TakFi</span>
-            </div>
+              <span className="text-xl font-bold text-white">TakFi</span>
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                Features
+              <Link href="#home" className="text-[#00ff88] hover:text-[#00ff88]/80 transition-colors font-medium">
+                Home
               </Link>
-              <Link href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
-                How it Works
+              <Link href="#about" className="text-white/70 hover:text-white transition-colors">
+                About Us
               </Link>
-              <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-                Pricing
+              <Link href="#how-it-works" className="text-white/70 hover:text-white transition-colors">
+                How it works
               </Link>
-              <Button asChild>
-                <Link href="/dashboard">Get Started</Link>
+              <Link href="#faq" className="text-white/70 hover:text-white transition-colors">
+                FAQ
+              </Link>
+              <Button className="bg-[#00ff88] hover:bg-[#00ff88]/90 text-black font-semibold">
+                Launch DApp
+                <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Fast Claims Section */}
-      <section className="relative overflow-hidden bg-background">
-        {/* Green accent triangles */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary transform rotate-45 translate-x-16 -translate-y-16" />
-        <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary transform rotate-45 translate-x-12 translate-y-12" />
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-[#0a0f0d] pt-20 pb-32">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Hero Content */}
+          <div className="text-center mb-16 relative z-10">
+            <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 text-balance">
+              <span className="text-white">Insure your Assets </span>
+              <span className="text-[#00ff88]">Ethically</span>
+              <span className="text-white">, the</span>
+              <br />
+              <span className="text-[#00ff88]">Halal</span>
+              <span className="text-white"> Way</span>
+            </h1>
+            <p className="text-lg lg:text-xl text-white/70 max-w-3xl mx-auto mb-10 leading-relaxed">
+              Protect your assets with the world's first blockchain-powered ethical insurance platform. Built on Hedera,
+              powered by AI, and rooted in fairness.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="bg-[#00ff88] hover:bg-[#00ff88]/90 text-black font-semibold px-8">
+                Launch DApp
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 bg-transparent"
+              >
+                Try live demo
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Dashboard Preview Mockup */}
+          <div className="relative max-w-6xl mx-auto perspective-1000">
+            <div className="relative transform-gpu" style={{ transform: "rotateX(8deg) rotateY(0deg)" }}>
+
+              {/* Dashboard content */}
+              <div className="relative rounded-2xl overflow-auto">
+                <img src="/policies.png" alt="TakFi Dashboard Preview" className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Insurance Needs Change Section */}
+      <section className="py-20 px-6 bg-[#141A16]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex gap-12 justify-center items-center">
+            {/* Left Side - Title */}
+            <div className="basis-6/12">
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                Why Insurance<br/>Needs Change
+              </h2>
+            </div>
+
+            {/* Right Side - Cards */}
+            <div className="space-y-6">
+              {/* Traditional Insurance Card */}
+              <div className="bg-gradient-to-br from-[#2a4a3a] to-[#1e3a2a] rounded-3xl pr-8 border border-[#00ff88]/10">
+              <div className="flex pr-6 gap-8 items-center">
+                  <img src="/bro.png" alt="" />
+                  <div>
+                    <p className="text-xl leading-relaxed">
+                      Traditional insurance is expensive, profit-driven, and often excludes communities seeking Sharia-compliant solutions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 items-center gap-6">
+                {/* Lack of Transparency Card */}
+                <div className="bg-gradient-to-br from-[#2a4a3a] to-[#1e3a2a] rounded-3xl border border-[#00ff88]/10">
+                  <div className="flex flex-col px-6 py-24 gap-8 items-center">
+                    <img src="/brolast.svg" alt="" />
+                    <div>
+                      <p className="text-xl leading-relaxed">
+                        Lack of transparency, creating distrust in claims and payouts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Millions Uninsured Card */}
+                <div className="bg-gradient-to-br from-[#2a4a3a] to-[#1e3a2a] rounded-3xl border border-[#00ff88]/10">
+                  <div className="flex flex-col px-6 py-20 gap-8 items-center">
+                    <img src="/rafiki.svg" alt="" />
+                    <div>
+                    <p className="text-xl leading-relaxed">
+                        Millions remain uninsured because current models are inaccessible and unfair.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Need to Revolutionize Insurance Section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Title */}
+          <h2 className="text-4xl lg:text-5xl font-bold text-center mb-16">
+            <span className="text-white">The Need to </span>
+            <span className="text-[#00ff88]">Revolutionize</span>
+            <span className="text-white"> Insurance</span>
+          </h2>
+
+          {/* Main Content Frame */}
+          <div className="relative max-w-6xl mx-auto">
+
+            {/* Content Container */}
+            <div className="grid lg:grid-cols-2 lg:grid-cols-[3fr_2fr] gap-12 items-center">
+                {/* Left side - Policy Cards Mockup */}
+                <div className="space-y-6">
+                  <img src="/carinsurance.svg" alt="" />
+                </div>
+
+                {/* Right side - Text Content */}
+                <div className="space-y-6">
+                  <h3 className="text-3xl lg:text-4xl font-bold text-white leading-tight">
+                    Individual and Group Policies
+                  </h3>
+                  <p className="text-lg text-white/70 leading-relaxed">
+                    Protect yourself with an individual plan or join your family, friends, or community in a group
+                    policy — fair, transparent, and Sharia-compliant coverage powered by blockchain.
+                  </p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fast Claims Section */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/claimbg.png')",
+          backgroundPosition: "right center",
+          backgroundColor: "#141A16",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "contain",
+        }}
+      >
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left side - Fast Claims content */}
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-balance">
-                  Fast Claims <Zap className="inline w-12 h-12 text-primary" />
+                  Fast Claims <Zap className="inline w-12 h-12 text-[#12D96A]" />
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
                   Protect yourself with an individual plan or join your family, friends, or community in a group policy
                   — fair, transparent, and Sharia-compliant coverage powered by blockchain.
                 </p>
               </div>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button size="lg" className="bg-[#12D96A] hover:bg-primary/90 text-primary-foreground">
                 Try live demo
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -82,197 +229,17 @@ export default function LandingPage() {
 
             {/* Right side - Submit Claim Form */}
             <div className="relative">
-              <Card className="bg-card border-border max-w-lg ml-auto">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-card-foreground mb-8">Submit a Claim</h2>
-
-                  <div className="space-y-6">
-                    {/* Policy ID */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium text-card-foreground">Policy ID</Label>
-                      <Select
-                        value={claimFormData.policyId}
-                        onValueChange={(value) => handleClaimInputChange("policyId", value)}
-                      >
-                        <SelectTrigger className="bg-input border-border text-foreground">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-popover border-border">
-                          <SelectItem value="Car/Motor">Car/Motor</SelectItem>
-                          <SelectItem value="Land">Land</SelectItem>
-                          <SelectItem value="Building">Building</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Claim Type */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium text-card-foreground">Claim Type</Label>
-                      <Input
-                        placeholder="e.g Car, Land, Health"
-                        value={claimFormData.claimType}
-                        onChange={(e) => handleClaimInputChange("claimType", e.target.value)}
-                        className="bg-input border-border text-foreground placeholder:text-muted-foreground"
-                      />
-                    </div>
-
-                    {/* Estimated Repair Cost and Date of Incident */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label className="text-sm font-medium text-card-foreground">Estimated Repair Cost</Label>
-                        <Input
-                          placeholder="min. 6 months"
-                          value={claimFormData.estimatedCost}
-                          onChange={(e) => handleClaimInputChange("estimatedCost", e.target.value)}
-                          className="bg-input border-border text-foreground placeholder:text-muted-foreground"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label className="text-sm font-medium text-card-foreground">Date of Incident</Label>
-                        <Input
-                          placeholder="min. 6 months"
-                          value={claimFormData.dateOfIncident}
-                          onChange={(e) => handleClaimInputChange("dateOfIncident", e.target.value)}
-                          className="bg-input border-border text-foreground placeholder:text-muted-foreground"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Location of Incident */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium text-card-foreground">Location of Incident</Label>
-                      <Input
-                        placeholder="Ar-Riyadh city, Saudi"
-                        value={claimFormData.locationOfIncident}
-                        onChange={(e) => handleClaimInputChange("locationOfIncident", e.target.value)}
-                        className="bg-input border-border text-foreground placeholder:text-muted-foreground"
-                      />
-                    </div>
-
-                    {/* Description of Incident */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium text-card-foreground">Description of Incident</Label>
-                      <Textarea
-                        placeholder="Type something"
-                        value={claimFormData.description}
-                        onChange={(e) => handleClaimInputChange("description", e.target.value)}
-                        className="bg-input border-border text-foreground placeholder:text-muted-foreground min-h-[100px] resize-none"
-                      />
-                    </div>
-
-                    {/* Upload Evidence */}
-                    <div className="space-y-2">
-                      <Label className="text-sm font-medium text-card-foreground">Upload Evidence</Label>
-                      <div className="border-2 border-dashed border-border rounded-lg p-6 text-center bg-input/50">
-                        <div className="flex flex-col items-center gap-2">
-                          <Upload className="h-6 w-6 text-muted-foreground" />
-                          <p className="text-sm text-muted-foreground">Upload a document as an evidence</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-4 pt-4">
-                      <Button
-                        variant="outline"
-                        className="flex-1 bg-secondary border-border text-secondary-foreground hover:bg-secondary/80"
-                      >
-                        Cancel
-                      </Button>
-                      <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground">Submit</Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <img src="/submit_claim.svg" alt="" />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Insurance Needs Change Section */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left side - Main heading */}
-            <div>
-              <h2 className="text-5xl lg:text-6xl font-bold leading-tight text-balance">
-                Why Insurance
-                <br />
-                Needs Change
-              </h2>
-            </div>
-
-            {/* Right side - Top illustration and text */}
-            <div className="space-y-8">
-              <div className="relative">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cjoOhaX21niWAPcqe9uXbouUAODLCc.png"
-                  alt="Traditional insurance illustration"
-                  className="w-full max-w-md ml-auto"
-                />
-                <div className="mt-6">
-                  <p className="text-lg text-foreground leading-relaxed">
-                    Traditional insurance is expensive, profit-driven, and often excludes communities seeking
-                    Sharia-compliant solutions.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom cards */}
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
-            <Card className="bg-card border-border p-8">
-              <CardContent className="p-0 space-y-6">
-                <div className="w-full h-48 bg-muted rounded-lg flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto">
-                      <span className="text-white text-2xl">✕</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">Lack of transparency</p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-card-foreground mb-2">
-                    Lack of transparency, creating distrust in claims and payouts.
-                  </h3>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card border-border p-8">
-              <CardContent className="p-0 space-y-6">
-                <div className="w-full h-48 bg-muted rounded-lg flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto">
-                      <span className="text-primary-foreground text-2xl">$</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">Accessibility issues</p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-card-foreground mb-2">
-                    Millions remain uninsured because current models are inaccessible and unfair.
-                  </h3>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
 
       {/* Secure and Transparent Section */}
       <section className="py-24 bg-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="relative w-64 h-64 mx-auto mb-12">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-VNbdd2zBLceUGqgSzQDXrGTW9sBLCJ.png"
-                alt="Security shield"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify between gap-6">
+          <div className="basis-6/12">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Secure and
               <br />
               Transparent
@@ -281,6 +248,9 @@ export default function LandingPage() {
               Built on blockchain technology for complete transparency and security. Every transaction is recorded,
               every claim is traceable, and every decision is auditable.
             </p>
+          </div>
+          <div>
+            <img src="/secure.svg" alt="" />
           </div>
         </div>
       </section>
